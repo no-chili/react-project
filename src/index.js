@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./assets/base.css";
+import "./assets/base.less";
 
 import Router from './router';
 
