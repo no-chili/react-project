@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from 'antd';
+import {Outlet} from 'react-router-dom'
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <Button type="primary">
         App
       </Button>
+      <Outlet/>
     </div>
   );
 }

@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./assets/base.less";
 
-import Router from './router';
+import { BrowserRouter } from "react-router-dom";
+import BaseRouter from './router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Router />
+    <BrowserRouter>
+      <BaseRouter></BaseRouter>
+    </BrowserRouter>
 );
 
