@@ -6,6 +6,7 @@ import Means from '../pages/Means'
 import Register from '../pages/Register'
 import {BrowserRouter as Router,useRoutes,Navigate,Route,Routes} from 'react-router-dom'
 
+// 标签形式
 // const BaseRouter=()=>(
 //   <Router>
 //     <Routes>
@@ -20,7 +21,7 @@ import {BrowserRouter as Router,useRoutes,Navigate,Route,Routes} from 'react-rou
 //   </Router>
 // )
 
-
+// useRoutes形式
 export default function BaseRouter() {
   let element=useRoutes([
     {

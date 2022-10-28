@@ -1,15 +1,33 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import './style/Login.less'
 import logo from '../assets/logo.png'
+import { LoginApi } from '../request/api';
+import {message} from 'antd'
 export default function Login() {
+  const navigate=useNavigate()
   const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    LoginApi({
+      username:values.username,
+      password:values.password
+    })
+    .then(res=>{
+      if(res.errCode===0){
+        message.success(res.message)
+        // 存储数据
+        localStorage.setItem('avatar',res.data.avatar)
+        localStorage.setItem('cms-token',res.data['cms-token'])
+        localStorage.setItem('editable',res.data.editable)
+        localStorage.setItem('player',res.data.player)
+        localStorage.setItem('username',res.data.username)
+        // 跳转
+        setTimeout(navigate('/list'),1000)
+      }else{
+        message.error(res.message)
+      }
+    })
   };
   return (
     <div className='login'>
@@ -19,7 +37,6 @@ export default function Login() {
           name="basic"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

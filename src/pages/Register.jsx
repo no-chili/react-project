@@ -4,12 +4,31 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import {Link} from 'react-router-dom'
 import './style/Login.less'
 import logo from '../assets/logo.png'
+import {RegisterApi} from '../request/api'
+import { message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 export default function Register() {
+  const navigate=useNavigate()
+  const onFinish = (values) => {
+    RegisterApi({
+      username:values.username,
+      password:values.password
+    })
+    .then(res=>{
+      if(res.errCode===0){
+        message.success(res.message)
+        setTimeout(navigate('/login'),1000)
+      }else{
+        message.error(res.message)
+      }
+    })
+  };
   return (
     <div className='login'>
       <div className="login_box">
         <img src={logo}/>
         <Form
+          onFinish={onFinish}
           name="basic"
           initialValues={{ remember: true }}
           autoComplete="off"
